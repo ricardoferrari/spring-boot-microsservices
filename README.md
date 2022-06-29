@@ -22,3 +22,6 @@ $ mvn spring-boot:run
 or 
 $ java -jar target/licensing-service-0.0.1-SNAPSHOT.jar
 ```
+## Using dockerized postgres
+$ docker pull postgres
+$ docker-compose -f postgres.yml up
