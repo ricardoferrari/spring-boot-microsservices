@@ -48,3 +48,8 @@ Executar o docker
 $ docker-compose up
 
 Para verificar a instância local em execução: $ aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+# Adicionando autenticação e autorização ao serviço
+Rodar o container do Keycloak: $ docker-compose -f ./keycloak/docker-compose.yml up
+
+Verificar documentação adicional na pasta Keycloak
