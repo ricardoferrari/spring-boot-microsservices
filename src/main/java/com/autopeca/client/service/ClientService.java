@@ -1,17 +1,25 @@
 package com.autopeca.client.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.autopeca.client.model.Client;
+import com.autopeca.client.utils.GetItem;
 
 @Service
 public class ClientService {
 
 	public Client getClient(String id, String storeId){
+		String firstName = "";
+
+		firstName = new GetItem().item();
+
 		Client client = new Client();
 		client.setId(id);
 		client.setStoreId(storeId);
-		client.setName("Haroldo");
+		client.setName(firstName);
 		client.setSurname("Vinicius");
 		client.setDescription("Cliente da filial de São Paulo");
 
