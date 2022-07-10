@@ -41,3 +41,10 @@ $ docker build -t client-service .
 Roda o container
 $ docker run client-service -it --rm -p 80:8000
 $ docker run -it --rm -p 8080:8080 client-service
+
+# Rodando o DynamoDB localmento
+Mudar para o diretório "/dynamodb": $ cd dynamodb
+Executar o docker
+$ docker-compose up
+
+Para verificar a instância local em execução: $ aws dynamodb list-tables --endpoint-url http://localhost:8000
