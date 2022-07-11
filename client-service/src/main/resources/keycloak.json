@@ -1,0 +1,37 @@
+{
+    "realm" : "autopecas",
+    "resource" : "client-service",
+    "realm-public-key" : "MIGfMA0GCSqGSIb3D...31LwIDAQAB",
+    "auth-server-url" : "http://localhost:8080/auth",
+    "ssl-required" : "external",
+    "use-resource-role-mappings" : true,
+    "enable-cors" : true,
+    "cors-max-age" : 1000,
+    "cors-allowed-methods" : "POST, PUT, DELETE, GET",
+    "cors-exposed-headers" : "WWW-Authenticate, My-custom-exposed-Header",
+    "bearer-only" : true,
+    "enable-basic-auth" : false,
+    "expose-token" : true,
+    "verify-token-audience" : true,
+    "credentials" : {
+      "secret" : "OEYiCsxCzhenj2vGHTkrjUpMSgM8eOHc"
+    },
+  
+    "connection-pool-size" : 20,
+    "socket-timeout-millis" : 5000,
+    "connection-timeout-millis" : 6000,
+    "connection-ttl-millis" : 500,
+    "disable-trust-manager" : false,
+    "allow-any-hostname" : false,
+    "truststore" : "path/to/truststore.jks",
+    "truststore-password" : "geheim",
+    "client-keystore" : "path/to/client-keystore.jks",
+    "client-keystore-password" : "geheim",
+    "client-key-password" : "geheim",
+    "token-minimum-time-to-live" : 10,
+    "min-time-between-jwks-requests" : 10,
+    "public-key-cache-ttl" : 86400,
+    "redirect-rewrite-rules" : {
+      "^/wsmaster/api/(.*)$" : "/api/$1"
+    }
+  }
