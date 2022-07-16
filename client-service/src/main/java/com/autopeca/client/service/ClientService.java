@@ -9,9 +9,10 @@ import com.autopeca.client.utils.GetItem;
 public class ClientService {
 
 	public Client getClient(String id, String storeId){
-		String firstName = "";
-
-		firstName = new GetItem().item();
+		String firstName = "Andreza";
+		
+		// Depends on dynamo DB
+		// firstName = new GetItem().item();
 
 		Client client = new Client();
 		client.setId(id);

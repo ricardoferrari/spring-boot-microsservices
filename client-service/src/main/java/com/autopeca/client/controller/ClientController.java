@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
+
 import com.autopeca.client.model.Client;
 import com.autopeca.client.service.ClientService;
 
@@ -19,6 +21,7 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 
+	@RolesAllowed({"ADMIN", "EMPLOYEE"})
 	@GetMapping(value="/{clientId}")
 	public ResponseEntity<Client> getLicense( @PathVariable("storeId") String storeId,
 			@PathVariable("clientId") String clientId) {
@@ -28,6 +31,7 @@ public class ClientController {
 		return ResponseEntity.ok(client);
 	}
 	
+	@RolesAllowed({"ADMIN"})
 	@PostMapping
 	public ResponseEntity<Client> addClient( @PathVariable("storeId") String storeId,
 			@RequestBody() String name) {
