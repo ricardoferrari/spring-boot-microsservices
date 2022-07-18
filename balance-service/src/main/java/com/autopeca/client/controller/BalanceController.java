@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.PermitAll;
 
 import com.autopeca.client.model.Balance;
 import com.autopeca.client.service.BalanceService;
@@ -19,15 +20,16 @@ import com.autopeca.client.service.BalanceService;
 public class BalanceController {
 
 	@Autowired
-	private ScoreService scoreService;
+	private BalanceService balanceService;
 
-	@RolesAllowed({"ADMIN", "EMPLOYEE"})
+	// @RolesAllowed({"ADMIN", "EMPLOYEE"})
+	@PermitAll
 	@GetMapping(value="/{clientId}/score")
-	public ResponseEntity<Client> getScore( @PathVariable("clientId") String clientId) {
+	public ResponseEntity<Balance> getBalance( @PathVariable("clientId") String clientId) {
 		
-		Number score = scoreService.getScore(clientId);
+		Balance balance = balanceService.getBalance(clientId);
 	
-		return ResponseEntity.ok(score);
+		return ResponseEntity.ok(balance);
 	}
 
 

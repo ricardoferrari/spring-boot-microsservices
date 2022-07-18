@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import javax.annotation.security.RolesAllowed;
 
 import com.autopeca.client.model.Client;
 import com.autopeca.client.service.ClientService;
+import com.autopeca.client.model.Balance;
 
 @RestController
 @RequestMapping(value="v1/store/{storeId}/client")
@@ -27,6 +31,9 @@ public class ClientController {
 			@PathVariable("clientId") String clientId) {
 		
 			Client client = clientService.getClient(clientId, storeId);
+			client.add( 
+				linkTo(methodOn(ClientController.class).getLicense(storeId, clientId)).withSelfRel()
+			);
 	
 		return ResponseEntity.ok(client);
 	}

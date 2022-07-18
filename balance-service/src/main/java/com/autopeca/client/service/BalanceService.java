@@ -7,7 +7,7 @@ import com.autopeca.client.model.Balance;
 @Service
 public class BalanceService {
 
-	public Number getScore(String clientId){
+	public Balance getBalance(String clientId){
 
 		Balance balance = new Balance();
 		balance.setClientId(clientId);
@@ -15,7 +15,7 @@ public class BalanceService {
 		balance.setBalance(0);
 		balance.setAnnotation("Cliente fidelizado");
 
-		return balance.getScore();
+		return balance;
 	}
 
 }
