@@ -4,15 +4,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.autopeca.client.model.Client;
-import com.autopeca.client.service.adapter.BalanceAdapter;
+// import com.autopeca.client.service.adapter.BalanceAdapter;
+import com.autopeca.client.service.adapter.BalanceRestTemplate;
 import com.autopeca.client.model.Balance;
 import com.autopeca.client.utils.GetItem;
 
 @Service
 public class ClientService {
 
+	// @Autowired
+	// BalanceAdapter balanceAdapter;
 	@Autowired
-	BalanceAdapter balanceAdapter;
+	BalanceRestTemplate balanceAdapter;
 
 	public Client getClient(String id, String storeId){
 		String firstName = "Andreza";

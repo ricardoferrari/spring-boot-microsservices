@@ -18,7 +18,7 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /app.jar)
 
 #stage 2
 #Same Java runtime
-FROM openjdk:17-alpine
+FROM openjdk:18-alpine
 
 EXPOSE 8081
 
