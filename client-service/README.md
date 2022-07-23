@@ -53,3 +53,9 @@ Para verificar a instância local em execução: $ aws dynamodb list-tables --en
 Rodar o container do Keycloak: $ docker-compose -f ./keycloak/docker-compose.yml up
 
 Verificar documentação adicional na pasta Keycloak
+
+## Variáveis de ambiente
+Para executar a aplicação em host específico é necessário atribuir a variável de ambiente "HOSTNAME"
+Checar variáveis:
+$ printenv
+$ export HOSTNAME=http://host.docker.internal:8081

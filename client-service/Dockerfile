@@ -1,7 +1,7 @@
 
 #stage 1
 #Start with a base image containing Java runtime
-FROM openjdk:17-alpine as build
+FROM openjdk:18-alpine as build
 
 # Add Maintainer Info
 LABEL maintainer="Ricardo A. Ferrari <ricardoaugusto.ferrari@gmail.com>"
@@ -18,9 +18,11 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /app.jar)
 
 #stage 2
 #Same Java runtime
-FROM openjdk:17-alpine
+FROM openjdk:18-alpine
 
-EXPOSE 8080
+ENV HOSTNAME=http://host.docker.internal:8081
+
+EXPOSE 8000
 
 # Add volume pointing to /tmp
 VOLUME /tmp
