@@ -1,9 +1,13 @@
 #stage 1
 #Start with a base image containing Java runtime
-FROM openjdk:11-slim as build
+FROM openjdk:18-alpine as build
 
 # Add Maintainer Info
 LABEL maintainer="Ricardo Ferrari <ricardoaugusto.ferrari@gmail.com>"
+
+# Enviroment variables
+# Apagar para o ambiente de produção
+ENV CLIENT_SECRET=nDyjPZogvtEgl6Ay4NLEews2Wd2AcZq9
 
 # The application's jar file
 ARG JAR_FILE
@@ -16,7 +20,7 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf /app.jar)
 
 #stage 2
 #Same Java runtime
-FROM openjdk:11-slim
+FROM openjdk:18-alpine
 
 #Add volume pointing to /tmp
 VOLUME /tmp

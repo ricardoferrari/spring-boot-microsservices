@@ -1,11 +1,12 @@
 
 #stage 1
 #Start with a base image containing Java runtime
-FROM openjdk:17-alpine as build
+FROM openjdk:18-alpine as build
 
 # Add Maintainer Info
 LABEL maintainer="Ricardo A. Ferrari <ricardoaugusto.ferrari@gmail.com>"
 
+ENV KEYCLOAK_HOSTNAME=http://host.docker.internal:8080/auth
 # The application's jar file
 # The jar file is the same defined on pom.xml
 ARG JAR_FILE=target/balance-0.0.1-SNAPSHOT.jar
