@@ -22,7 +22,7 @@ FROM openjdk:18-alpine
 
 ENV HOSTNAME=http://host.docker.internal:8081
 
-EXPOSE 8000
+EXPOSE 8001
 
 # Add volume pointing to /tmp
 VOLUME /tmp
