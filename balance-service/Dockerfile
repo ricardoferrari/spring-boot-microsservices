@@ -6,7 +6,7 @@ FROM openjdk:18-alpine as build
 # Add Maintainer Info
 LABEL maintainer="Ricardo A. Ferrari <ricardoaugusto.ferrari@gmail.com>"
 
-ENV KEYCLOAK_HOSTNAME=http://host.docker.internal:8080/auth
+ENV KEYCLOAK_HOST=host.docker.internal
 # The application's jar file
 # The jar file is the same defined on pom.xml
 ARG JAR_FILE=target/balance-0.0.1-SNAPSHOT.jar

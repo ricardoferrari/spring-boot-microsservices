@@ -1,0 +1,52 @@
+keycloak:
+  realm: autopecas
+  auth-server-url: http://${KEYCLOAK_HOST:localhost}:8080/auth
+  ssl-required: external
+  resource: client-service
+  credentials:
+    secret: 64MOu2BXR9lTckvB30ZOielAVCepfSCq
+  use-resource-role-mappings: true
+  bearer-only: true
+
+server:
+  port: 8001
+
+resilience4j.circuitbreaker:
+  instances:
+    clientService:
+      registerHealthIndicator: true
+      ringBufferSizeInClosedState: 5
+      ringBufferSizeInHalfOpenState: 3
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 2
+      recordExceptions:
+        - java.io.IOException
+
+resilience4j.ratelimiter:
+  instances:
+    clientService:
+      limitForPeriod: 5
+      limitRefreshPeriod: 5000
+      timeoutDuration: 1000ms
+
+resilience4j.retry:
+  instances:
+    clientService:
+      maxRetryAttempts: 3
+      waitDuration: 10000
+      retry-exceptions:
+        - java.util.concurrent.TimeoutException
+
+resilience4j.bulkhead:
+  instances:
+    clientService:
+      maxWaitDuration: 2ms
+      maxConcurrentCalls: 10
+
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    clientService:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
