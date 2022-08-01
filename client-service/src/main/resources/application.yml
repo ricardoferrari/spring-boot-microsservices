@@ -1,0 +1,12 @@
+keycloak:
+  realm: autopecas
+  auth-server-url: http://${KEYCLOAK_HOST:localhost}:8080/auth
+  ssl-required: external
+  resource: client-service
+  credentials:
+    secret: 64MOu2BXR9lTckvB30ZOielAVCepfSCq
+  use-resource-role-mappings: true
+  bearer-only: true
+
+server:
+  port: 8001

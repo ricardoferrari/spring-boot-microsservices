@@ -8,11 +8,15 @@ import java.util.logging.Logger;
 
 import com.autopeca.client.model.Client;
 import com.autopeca.client.service.adapter.BalanceRestTemplate;
+import com.autopeca.client.service.BalanceService;
 import com.autopeca.client.model.Balance;
 
+import java.util.Random;
+import java.security.SecureRandom;
 import java.util.concurrent.TimeoutException;
 import org.apache.http.conn.HttpHostConnectException;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead.Type;
@@ -26,11 +30,18 @@ public class ClientService {
 	@Autowired
 	BalanceRestTemplate balanceAdapter;
 
+	@Autowired
+	BalanceService balanceService;
+
 	private static final String BACKEND = "clientService";
 
 	private static final java.util.logging.Logger logger = Logger.getLogger( ClientService.class.getName() );
 
-	public Client getClient(String id, String storeId) throws IOException {
+	// @RateLimiter(name = "balanceService", fallbackMethod = "fallbackRetrieveBalance")
+	// @Retry(name = "balanceService", fallbackMethod = "fallbackRetrieveBalance")
+	// @Bulkhead(name = "balanceService", type= Type.THREADPOOL, fallbackMethod = "fallbackRetrieveBalance")
+	@CircuitBreaker(name = BACKEND, fallbackMethod = "fallbackRetrieveBalance")
+	public Client getClient(String id, String storeId) throws IOException, TimeoutException {
 		String firstName = "Andreza";
 		
 		Client client = new Client();
@@ -41,8 +52,8 @@ public class ClientService {
 		client.setDescription("Cliente da filial de São Paulo");
 		Balance balance = null;
 		try {
-			balance = retrieveBalance(id);
-		} catch (IOException e) {
+			balance = balanceService.retrieveBalance(id);
+		} catch (IOException | TimeoutException e) {
 			logger.log(Level.WARNING,"*** Circuit braker almost open ***");
 			throw e;
 		}
@@ -55,18 +66,8 @@ public class ClientService {
 		return client;
 	}
 
-	@CircuitBreaker(name = BACKEND, fallbackMethod = "fallbackRetrieveBalance")
-	// @RateLimiter(name = "balanceService", fallbackMethod = "fallbackRetrieveBalance")
-	// @Retry(name = "balanceService", fallbackMethod = "fallbackRetrieveBalance")
-	// @Bulkhead(name = "balanceService", type= Type.THREADPOOL, fallbackMethod = "fallbackRetrieveBalance")
-	private Balance retrieveBalance(String clientId) throws IOException {
-		Balance balance = null;
-		balance = balanceAdapter.getBalance(clientId);
-		return balance;
-	}
-
 	@SuppressWarnings("unused")
-	private Balance fallbackRetrieveBalance(String clientId, Throwable exception) {
+	private Balance fallbackRetrieveBalance(String clientId, Exception exception) {
 		Balance balance = new Balance();
 		balance.setClientId(clientId);
 		balance.setBalance(0.00);
