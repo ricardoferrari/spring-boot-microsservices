@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>18</java.version>
-		<resilience4j.version>1.7.1</resilience4j.version>
+		<resilience4j.version>1.7.0</resilience4j.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -77,6 +77,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-aop</artifactId>
+    	</dependency>
 
 		<dependency>
 		    <groupId>io.github.resilience4j</groupId>

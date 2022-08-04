@@ -8,7 +8,7 @@ keycloak:
   ssl-required: external
   resource: client-service
   credentials:
-    secret: 64MOu2BXR9lTckvB30ZOielAVCepfSCq
+    secret: nDyjPZogvtEgl6Ay4NLEews2Wd2AcZq9
   use-resource-role-mappings: true
   bearer-only: true
 server:
