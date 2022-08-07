@@ -25,7 +25,11 @@ Para carregar variaveis de ambiente:
     docker run --env PORT_NUMBER=8071 <image-name>
     docker-compose --env-file ./config/.env.dev up
 
-Lemvrando de atribuir a variável de ambiente com:
+Lembrando de atribuir a variável de ambiente com:
 
     export CLIENT_SECRET
     printenv | grep CLIENT_SECRET
+
+Para executar o Server de configuração localmente pode-se executar o script:
+
+> $ ./script/run_local.sh

@@ -9,6 +9,7 @@ LABEL maintainer="Ricardo Ferrari <ricardoaugusto.ferrari@gmail.com>"
 # Apagar para o ambiente de produção
 ENV CLIENT_SECRET=nDyjPZogvtEgl6Ay4NLEews2Wd2AcZq9
 
+EXPOSE 8071
 # The application's jar file
 ARG JAR_FILE
 
