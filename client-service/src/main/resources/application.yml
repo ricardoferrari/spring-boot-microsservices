@@ -1,5 +1,5 @@
 spring:
-    application.name: resilience4j-demo
+    application.name: client-service
     jackson.serialization.indent_output: true
 
 management.endpoints.web.exposure.include: '*'

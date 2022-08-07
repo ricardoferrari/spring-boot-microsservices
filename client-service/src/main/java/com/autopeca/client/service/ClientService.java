@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import com.autopeca.client.model.Client;
 import com.autopeca.client.service.BalanceService;
 import com.autopeca.client.model.Balance;
+import com.autopeca.client.config.ServiceConfig;
 
 import java.util.concurrent.TimeoutException;
 import java.io.IOException;
@@ -25,6 +26,9 @@ import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 @Aspect
 public class ClientService {
 
+	@Autowired
+	ServiceConfig config;
+	
 	@Autowired
 	BalanceService balanceService;
 
@@ -77,6 +81,7 @@ public class ClientService {
 	}
 
 	public Client addClient(String storeId, String name, String surname){
+		logger.log(Level.WARNING,config.getProperty());
 		Client client = new Client();
 		client.setId("1234444");
 		client.setStoreId(storeId);
