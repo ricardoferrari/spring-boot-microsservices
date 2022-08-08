@@ -1,0 +1,43 @@
+spring:
+    application.name: client-service
+    jackson.serialization.indent_output: true
+
+management.endpoints.web.exposure.include: '*'
+management.endpoint.health.show-details: always
+
+management.health.diskspace.enabled: false
+management.health.circuitbreakers.enabled: true
+management.health.ratelimiters.enabled: false
+
+management.metrics.tags.application: ${spring.application.name}
+management.metrics.distribution.percentiles-histogram.http.server.requests: true
+management.metrics.distribution.percentiles-histogram.resilience4j.circuitbreaker.calls: true
+
+#resilience4j.circuitbreaker.metrics.use_legacy_binder: true
+
+keycloak:
+  realm: autopecas
+  auth-server-url: http://${KEYCLOAK_HOST:localhost}:8080/auth
+  ssl-required: external
+  resource: client-service
+  credentials:
+    secret: nDyjPZogvtEgl6Ay4NLEews2Wd2AcZq9
+  use-resource-role-mappings: true
+  bearer-only: true
+
+server:
+  port: 8001
+
+resilience4j.circuitbreaker:
+    instances:
+        clientService:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            slowCallRateThreshold: 10
+            slowCallDurationThreshold: 2000
+            permittedNumberOfCallsInHalfOpenState: 10
+            slidingWindowType: COUNT_BASED
+            minimumNumberOfCalls: 5
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 10
+            eventConsumerBufferSize: 10
