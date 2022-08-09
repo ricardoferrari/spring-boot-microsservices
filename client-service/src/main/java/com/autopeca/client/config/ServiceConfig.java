@@ -8,15 +8,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Configuration
-// @ConfigurationProperties(prefix = "example")
+@ConfigurationProperties(prefix = "example")
 @Getter @Setter
 public class ServiceConfig{
 
-  @Value("${example.property}")
+  @Value("property")
   private String property;
-  @Value("${example.host}")
+  @Value("host")
   private String host;
-  @Value("${example.name}")
+  @Value("name")
   private String name;
+  @Value("${keycloak.realm}")
+  private String realm;
     
 }
