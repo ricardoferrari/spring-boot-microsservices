@@ -81,7 +81,7 @@ public class ClientService {
 	}
 
 	public Client addClient(String storeId, String name, String surname){
-		logger.log(Level.WARNING,config.getProperty());
+		logger.log(Level.WARNING,config.getProperty()+config.getName()+config.getHost());
 		Client client = new Client();
 		client.setId("1234444");
 		client.setStoreId(storeId);
